@@ -13,6 +13,8 @@ export default memo(function RouteGuard({ routes }) {
 		routeConfig => routeConfig.path === pathname,
 	);
 
+	console.log(pathname);
+
 	// 校验 路由合法性, 授权, 权限
 	if (
 		targetConfig &&
@@ -24,6 +26,11 @@ export default memo(function RouteGuard({ routes }) {
 				<Route path={targetConfig.path} component={targetConfig.component} />;
 			</Suspense>
 		);
+	}
+
+	// auth 错误
+	if (targetConfig && targetConfig.auth !== authenticateStatus) {
+		return <Redirect to="/auth/login" />;
 	}
 
 	return <Redirect to="/404" />;
