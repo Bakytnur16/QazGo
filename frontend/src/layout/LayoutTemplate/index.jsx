@@ -51,9 +51,7 @@ export default memo(function LayoutTemplate({ header, content, footer }) {
 					) : null}
 				</div>
 				{header && header.logo ? (
-					<img className="logo" src="" alt="logo">
-						{header.logo}
-					</img>
+					<div className="logo">{header.logo}</div>
 				) : null}
 
 				{header && header.other ? header.other : null}

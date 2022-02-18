@@ -39,6 +39,12 @@ export const HeaderBox = styled('header')(({ theme }) => ({
 		width: '48px',
 		height: '48px',
 		objectFit: 'cover',
+
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+
+		color: '#fff',
 	},
 }));
 
