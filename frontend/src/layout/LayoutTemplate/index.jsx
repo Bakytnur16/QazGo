@@ -59,7 +59,7 @@ export default memo(function LayoutTemplate({ header, content, footer }) {
 				{header && header.other ? header.other : null}
 			</HeaderBox>
 			<ContentBox>{content}</ContentBox>
-			<BottomNavigationBox>{footer}</BottomNavigationBox>
+			{footer ? <BottomNavigationBox>{footer}</BottomNavigationBox> : null}
 		</LayoutTemplateBox>
 	);
 });
