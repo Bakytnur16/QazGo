@@ -4,25 +4,20 @@
  * date-fns 用到的 locale对象
  */
 
-import { kzKZ, enUS, zhCN } from '@mui/material/locale';
-import { kk, enUS as dateEnUS, zhCN as dateZhCN } from 'date-fns/locale';
+import { kzKZ, ruRU } from '@mui/material/locale';
+import { kk, ru } from 'date-fns/locale';
 
-export default function getLocale(locale: 'kkKZ' | 'enUS' | 'zhCN') {
+export default function getLocale(locale: 'kkKZ' | 'ruRU') {
 	switch (locale) {
 		case 'kkKZ':
 			return {
 				uiLocale: kzKZ,
 				dateLocale: kk,
 			};
-		case 'enUS':
+		case 'ruRU':
 			return {
-				uiLocale: enUS,
-				dateLocale: dateEnUS,
-			};
-		case 'zhCN':
-			return {
-				uiLocale: zhCN,
-				dateLocale: dateZhCN,
+				uiLocale: ruRU,
+				dateLocale: ru,
 			};
 		default:
 			return {

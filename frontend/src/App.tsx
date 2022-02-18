@@ -26,10 +26,7 @@ function App() {
 	});
 
 	const locale = useCreation(() => getLocale(page.locale), [page.locale]);
-	const theme = useCreation(
-		() => getTheme(locale.uiLocale, page.viewMode),
-		[page],
-	);
+	const theme = useCreation(() => getTheme(locale.uiLocale), [locale]);
 
 	return (
 		<BrowserRouter>

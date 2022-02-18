@@ -1,15 +1,15 @@
 export interface RoleProperties {
 	guest: string;
-	user: string;
-	admin: string;
+	client: string;
+	delivery: string;
 	all: Function;
 }
 
 export const Role: RoleProperties = {
 	guest: 'guest',
-	user: 'user',
-	admin: 'admin',
+	client: 'client',
+	delivery: 'delivery',
 	all(): string[] {
-		return [this.guest, this.user, this.admin];
+		return [this.guest, this.client, this.delivery];
 	},
 };
