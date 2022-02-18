@@ -28,8 +28,20 @@ export default memo(function RouteGuard({ routes }) {
 		);
 	}
 
-	// auth 错误
+	// 根路由 处理
+	if (pathname === '/') {
+		switch (user.role) {
+			case 'client':
+				return <Redirect to="/client/orders" />;
+			case 'delivery':
+				return <Redirect to="/delivery/orders" />;
+			default:
+				return <Redirect to="/auth/login" />;
+		}
+	}
+
 	if (targetConfig && targetConfig.auth !== authenticateStatus) {
+		// auth 错误
 		return <Redirect to="/auth/login" />;
 	}
 
