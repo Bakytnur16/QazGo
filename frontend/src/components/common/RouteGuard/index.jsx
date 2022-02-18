@@ -13,8 +13,6 @@ export default memo(function RouteGuard({ routes }) {
 		routeConfig => routeConfig.path === pathname,
 	);
 
-	console.log(pathname);
-
 	// 校验 路由合法性, 授权, 权限
 	if (
 		targetConfig &&
