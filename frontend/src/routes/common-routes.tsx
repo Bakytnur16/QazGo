@@ -6,12 +6,7 @@ import { Role } from '@/utils';
 const commonRoutes: RouteProps[] = [
 	{
 		path: '/404',
-		component: lazy(
-			() =>
-				import(
-					/* webpackChunkName: "PageNotFoundPage" */ '@/pages/common/PageNotFoundPage'
-				),
-		),
+		component: lazy(() => import('@/pages/common/PageNotFoundPage')),
 		fallback: <div>404 Loading...</div>,
 		auth: false,
 		role: Role.all(),
