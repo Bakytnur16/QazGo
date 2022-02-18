@@ -1,9 +1,7 @@
 # /node_modules/* ignored by default
 build/*
-dist/*
-dist-ssr/*
-
+# Ignore built files except build/index.js
+!build/index.js
 # other
-# .eslintrc.js
-# commitlint.config.js
-# craco.config.js
+.eslintrc.js
+commitlint.config.js
