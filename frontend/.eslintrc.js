@@ -133,7 +133,7 @@ module.exports = {
 		// 禁止使用 with
 		'no-with': 'warn',
 		// Promise 的 reject 中必须传入 Error 对象, 而不是字面量
-		'prefer-promise-reject-errors': 'error',
+		'prefer-promise-reject-errors': 'off',
 		// parseInt 必须传入第二个参数
 		'radix': 'warn',
 
