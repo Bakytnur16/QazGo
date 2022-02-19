@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { LayoutTemplate } from '@/layout';
+
 export default function OrderPage() {
-	return <div>OrderPage</div>;
+	return <LayoutTemplate />;
 }
