@@ -16,11 +16,8 @@ class UserList(generics.ListCreateAPIView):
 class UserDetail(APIView):
     def get(self, request):
         
-        user_ser = UserSerializer(data = request.user)
-        user_ser.is_valid()
-        # print(user_ser.is_valid(),'\n'*3)
-
-        return Response(user_ser.data)
+        user_obj = UserSerializer(instance=request.user)
+        return Response(user_obj.data)
 
 class RegisterView(generics.CreateAPIView):
     queryset = User.objects.all()

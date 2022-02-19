@@ -10,7 +10,7 @@ import { LoginOutlined } from '@mui/icons-material';
 import { LayoutTemplate } from '@/layout';
 
 import { useSetState, useBoolean } from 'ahooks';
-import { reqLog } from '@/service/api/auth-api';
+import { reqLog, reqGetData } from '@/service/api/auth-api';
 
 import { LoginContentBox } from './style';
 
@@ -56,6 +56,11 @@ function LoginContent() {
 				} = res;
 
 				// setUser(user => ({ ...user, jwt }));
+				reqGetData(res.data.access).then(res=>{
+					console.log(res);
+					setLoginLoading(false);
+				});
+
 				setLoginLoading(false);
 			})
 			.catch(err => {
