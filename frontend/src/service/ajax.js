@@ -2,7 +2,7 @@ import axios from 'axios';
 import { localStorage } from '@/utils';
 
 export const apiServerInstance = axios.create({
-	baseURL: 'http://localhost:8000',
+	baseURL: 'http://192.168.0.3:8000',
 	validateStatus: status => status >= 200 && status < 300,
 });
 
