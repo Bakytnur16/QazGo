@@ -12,10 +12,11 @@ import {
 	FormControl,
 	FormControlLabel,
 } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { LoginOutlined } from '@mui/icons-material';
 import { LayoutTemplate } from '@/layout';
 
-import { useSetState } from 'ahooks';
+import { useSetState, useBoolean } from 'ahooks';
 import { reqLog } from '@/service/api/auth-api';
 
 import { RegisterContentBox } from './style';
@@ -39,6 +40,7 @@ function RegisterContent() {
 		password: '',
 		role: 'client',
 	});
+	const [registerLoading, { set: setRegisterLoading }] = useBoolean(false);
 
 	const [loginMessgae, setRegisterMessage] = useSetState({
 		open: false,
@@ -46,17 +48,22 @@ function RegisterContent() {
 	});
 
 	const handleRegister = () => {
+		setRegisterLoading(true);
+
 		if (!Object.values(registerData).every(el => Boolean(el))) {
 			setRegisterMessage({ open: true, content: 'Барлығын толтыру керек' });
+			setRegisterLoading(false);
 			return;
 		}
 
 		reqLog(registerData)
 			.then(res => {
 				console.log(res);
+				setRegisterLoading(false);
 			})
 			.catch(err => {
 				setRegisterMessage({ open: true, content: err.message });
+				setRegisterLoading(false);
 			});
 
 		console.log(registerData);
@@ -109,12 +116,14 @@ function RegisterContent() {
 					</RadioGroup>
 				</FormControl>
 
-				<Button
+				<LoadingButton
 					variant="contained"
 					style={{ marginTop: '20px' }}
-					onClick={handleRegister}>
+					onClick={handleRegister}
+					loading={registerLoading}
+					loadingIndicator="Орындалуда...">
 					Тіркелу
-				</Button>
+				</LoadingButton>
 				<Button variant="outlined" onClick={() => history.push('/auth/login')}>
 					Кіру
 				</Button>

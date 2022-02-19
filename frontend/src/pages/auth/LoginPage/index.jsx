@@ -1,11 +1,15 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 
+import { useSetRecoilState } from 'recoil';
+import { userAtom } from '@/store';
+
 import { Box, TextField, Button, Snackbar } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
 import { LoginOutlined } from '@mui/icons-material';
 import { LayoutTemplate } from '@/layout';
 
-import { useSetState } from 'ahooks';
+import { useSetState, useBoolean } from 'ahooks';
 import { reqLog } from '@/service/api/auth-api';
 
 import { LoginContentBox } from './style';
@@ -24,10 +28,12 @@ export default function LoginPage() {
 
 function LoginContent() {
 	const history = useHistory();
+	const setUser = useSetRecoilState(userAtom);
 	const [loginData, setLoginData] = useSetState({
 		username: '',
 		password: '',
 	});
+	const [loginLoading, { set: setLoginLoading }] = useBoolean(false);
 
 	const [loginMessgae, setLoginMessage] = useSetState({
 		open: false,
@@ -35,17 +41,26 @@ function LoginContent() {
 	});
 
 	const handleLogin = () => {
+		setLoginLoading(true);
+
 		if (!Object.values(loginData).every(el => Boolean(el))) {
 			setLoginMessage({ open: true, content: 'Барлығын толтыру керек' });
+			setLoginLoading(false);
 			return;
 		}
 
 		reqLog(loginData)
 			.then(res => {
-				console.log(res);
+				let {
+					data: { access: jwt },
+				} = res;
+
+				// setUser(user => ({ ...user, jwt }));
+				setLoginLoading(false);
 			})
 			.catch(err => {
 				setLoginMessage({ open: true, content: err.message });
+				setLoginLoading(false);
 			});
 	};
 
@@ -78,13 +93,17 @@ function LoginContent() {
 					}
 				/>
 
-				<Button
+				<LoadingButton
 					variant="contained"
 					style={{ marginTop: '20px' }}
-					onClick={handleLogin}>
+					onClick={handleLogin}
+					loading={loginLoading}
+					loadingIndicator="Орындалуда...">
 					Кіру
-				</Button>
-				<Button variant="outlined" onClick={() => history.push('/auth/register')}>
+				</LoadingButton>
+				<Button
+					variant="outlined"
+					onClick={() => history.push('/auth/register')}>
 					Тіркелу
 				</Button>
 			</Box>

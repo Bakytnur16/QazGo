@@ -27,6 +27,7 @@ apiServerInstance.interceptors.response.use(
 					message: 'Сервер құлап қалды...',
 				});
 			} else if (status >= 400 && status < 500) {
+				err.response.data.message = err.response.data.detail;
 				return Promise.reject(err.response.data);
 			} else {
 				return Promise.reject({
